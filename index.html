@@ -3,236 +3,368 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>WorldWise — Know More. Go Further.</title>
-<meta name="description" content="WorldWise is an interactive international knowledge quiz about countries, cultures, geography, history and more.">
+<title>WorldWise V2 — Know More. Go Further.</title>
+<meta name="description" content="WorldWise V2 — a global knowledge game covering geography, culture, history, flags, food, wildlife and more.">
 <style>
-:root{
-  --bg:#07111f; --panel:#0d1b2d; --panel2:#10243b; --text:#f5f8ff;
-  --muted:#8ea1b8; --line:rgba(255,255,255,.09); --accent:#54d6c8;
-  --accent2:#7c6cff; --gold:#f5c76a; --danger:#ff6b7a;
-  --shadow:0 24px 70px rgba(0,0,0,.3); --radius:24px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:radial-gradient(circle at 80% 10%,rgba(84,214,200,.09),transparent 28%),radial-gradient(circle at 15% 30%,rgba(124,108,255,.12),transparent 30%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button{font:inherit}
-a{color:inherit;text-decoration:none}
-.container{width:min(1160px,calc(100% - 40px));margin:auto}
-nav{height:78px;display:flex;align-items:center;justify-content:space-between}
-.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.04em;font-size:21px}
-.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#38a9ed);display:grid;place-items:center;color:#07111f;font-weight:900;box-shadow:0 8px 25px rgba(84,214,200,.22)}
-.navlinks{display:flex;gap:28px;color:var(--muted);font-size:14px}
-.navlinks a:hover{color:var(--text)}
-.navbtn{padding:10px 16px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03)}
-.hero{min-height:590px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:45px;padding:55px 0 75px}
-.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}
-.dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 15px var(--accent)}
-h1{font-size:clamp(50px,7vw,82px);line-height:.94;letter-spacing:-.07em;margin:17px 0 24px;max-width:700px}
-.gradient{background:linear-gradient(110deg,#fff 15%,#9ff5ec 60%,#9d92ff);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero p{font-size:18px;line-height:1.7;color:var(--muted);max-width:590px}
-.actions{display:flex;gap:13px;margin-top:32px;flex-wrap:wrap}
-.primary,.secondary{border:0;border-radius:14px;padding:14px 20px;cursor:pointer;font-weight:800;transition:.2s transform,.2s box-shadow}
-.primary{background:linear-gradient(135deg,var(--accent),#38a9ed);color:#06131d;box-shadow:0 12px 30px rgba(84,214,200,.18)}
-.secondary{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--text)}
-.primary:hover,.secondary:hover{transform:translateY(-2px)}
-.globe-card{position:relative;height:420px;border:1px solid var(--line);border-radius:32px;background:linear-gradient(145deg,rgba(18,40,64,.8),rgba(8,19,33,.9));overflow:hidden;box-shadow:var(--shadow)}
-.globe{position:absolute;width:330px;height:330px;border-radius:50%;left:50%;top:48%;transform:translate(-50%,-50%);background:radial-gradient(circle at 35% 30%,#6be4d7 0 4%,#277c89 17%,#11334c 52%,#091625 75%);box-shadow:inset -25px -25px 70px rgba(0,0,0,.45),0 0 90px rgba(84,214,200,.13)}
-.globe:before,.globe:after{content:"";position:absolute;inset:18px;border:1px solid rgba(160,255,245,.25);border-radius:50%}
-.globe:after{inset:55px;border-left-color:transparent;border-right-color:transparent;transform:rotate(32deg)}
-.lat{position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(160,255,245,.2)}
-.pin{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px var(--gold)}
-.p1{left:33%;top:38%}.p2{left:61%;top:48%}.p3{left:48%;top:64%}.p4{left:69%;top:29%}
-.float{position:absolute;background:rgba(8,19,33,.85);border:1px solid var(--line);backdrop-filter:blur(12px);border-radius:16px;padding:13px 15px;font-size:12px;color:var(--muted);box-shadow:var(--shadow)}
-.float strong{display:block;color:var(--text);font-size:15px;margin-bottom:2px}.f1{left:20px;top:24px}.f2{right:20px;bottom:28px}.f3{right:25px;top:85px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;padding-bottom:85px}
-.stat{padding:22px;border:1px solid var(--line);background:rgba(255,255,255,.025);border-radius:18px}
-.stat b{font-size:28px}.stat span{display:block;color:var(--muted);font-size:13px;margin-top:5px}
-.section{padding:35px 0 90px}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:25px}
-.section h2{font-size:34px;letter-spacing:-.04em;margin:0}.section-head p{color:var(--muted);margin:6px 0 0}
-.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-.category{padding:22px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border-radius:20px;cursor:pointer;transition:.2s}
-.category:hover{transform:translateY(-4px);border-color:rgba(84,214,200,.35)}
-.icon{font-size:27px;margin-bottom:22px}.category h3{margin:0 0 6px}.category p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}
-.hidden{display:none!important}
-.quiz-wrap{padding:60px 0 100px;min-height:700px}
-.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
-.back{color:var(--muted);background:none;border:0;cursor:pointer}
-.progress{height:7px;background:rgba(255,255,255,.07);border-radius:20px;overflow:hidden;margin-bottom:35px}
-.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:.35s}
-.quiz-card{max-width:820px;margin:auto;padding:38px;border:1px solid var(--line);border-radius:28px;background:rgba(13,27,45,.82);box-shadow:var(--shadow)}
-.qmeta{color:var(--accent);font-size:13px;font-weight:800}.quiz-card h2{font-size:32px;line-height:1.2;margin:13px 0 28px;letter-spacing:-.03em}
-.options{display:grid;gap:12px}.option{display:flex;align-items:center;gap:15px;text-align:left;width:100%;padding:17px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025);color:var(--text);cursor:pointer;transition:.18s}
-.option:hover:not(:disabled){border-color:rgba(84,214,200,.45);background:rgba(84,214,200,.06)}
-.letter{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);color:var(--muted);font-weight:800}
-.option.correct{border-color:rgba(84,214,200,.7);background:rgba(84,214,200,.1)}.option.correct .letter{background:var(--accent);color:#06131d}
-.option.wrong{border-color:rgba(255,107,122,.6);background:rgba(255,107,122,.08)}.option.wrong .letter{background:var(--danger);color:white}
-.feedback{margin-top:18px;padding:15px;border-radius:14px;background:rgba(255,255,255,.04);color:var(--muted);line-height:1.55}.feedback b{color:var(--text)}
-.quiz-footer{display:flex;justify-content:space-between;align-items:center;margin-top:26px;color:var(--muted);font-size:13px}
-.result{text-align:center;max-width:700px;margin:auto}.score-ring{width:170px;height:170px;border-radius:50%;margin:10px auto 25px;display:grid;place-items:center;background:conic-gradient(var(--accent) 0 82%,rgba(255,255,255,.08) 82%);position:relative}
-.score-ring:after{content:"";position:absolute;inset:12px;background:var(--panel);border-radius:50%}.score-number{position:relative;z-index:1;font-size:42px;font-weight:900}.result h2{font-size:42px;margin:0 0 8px}.result p{color:var(--muted);line-height:1.6}
-.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:30px 0}.result-stats div{padding:18px;border:1px solid var(--line);border-radius:15px}.result-stats b{display:block;font-size:23px}.result-stats span{font-size:12px;color:var(--muted)}
-footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:13px;display:flex;justify-content:space-between}
-@media(max-width:850px){.hero{grid-template-columns:1fr;padding-top:35px}.globe-card{height:350px}.categories{grid-template-columns:repeat(2,1fr)}.navlinks{display:none}}
-@media(max-width:550px){.container{width:min(100% - 24px,1160px)}h1{font-size:53px}.stats,.result-stats{grid-template-columns:1fr}.categories{grid-template-columns:1fr}.quiz-card{padding:24px}.quiz-card h2{font-size:25px}.globe{width:250px;height:250px}footer{gap:15px;flex-direction:column}}
+:root{--bg:#07111f;--panel:#0d1b2d;--panel2:#10243b;--text:#f5f8ff;--muted:#8ea1b8;--line:rgba(255,255,255,.09);--accent:#54d6c8;--accent2:#7c6cff;--gold:#f5c76a;--danger:#ff6b7a;--shadow:0 24px 70px rgba(0,0,0,.3);--radius:24px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% 10%,rgba(84,214,200,.09),transparent 28%),radial-gradient(circle at 15% 30%,rgba(124,108,255,.12),transparent 30%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}.container{width:min(1180px,calc(100% - 32px));margin:auto}.hidden{display:none!important}
+nav{height:76px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}.brand{display:flex;align-items:center;gap:11px;font-weight:900;font-size:21px;letter-spacing:-.04em}.logo{width:38px;height:38px;border-radius:12px;background:linear-gradient(135deg,var(--accent),#38a9ed);display:grid;place-items:center;color:#07111f;font-weight:900}
+.navlinks{display:flex;gap:10px;align-items:center}.navlinks button,.navbtn{padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:rgba(255,255,255,.03);color:var(--muted)}.navlinks button:hover,.navbtn:hover{color:var(--text);border-color:rgba(84,214,200,.35)}
+.hero{min-height:550px;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:45px;padding:55px 0 70px}.eyebrow{display:inline-flex;align-items:center;gap:8px;color:var(--accent);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.12em}.dot{width:7px;height:7px;background:var(--accent);border-radius:50%;box-shadow:0 0 15px var(--accent)}
+h1{font-size:clamp(48px,7vw,80px);line-height:.94;letter-spacing:-.07em;margin:17px 0 24px}.gradient{background:linear-gradient(110deg,#fff 15%,#9ff5ec 60%,#9d92ff);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{font-size:18px;line-height:1.7;color:var(--muted);max-width:620px}
+.actions{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}.primary,.secondary,.danger{border:0;border-radius:14px;padding:13px 18px;font-weight:800;transition:.2s transform}.primary{background:linear-gradient(135deg,var(--accent),#38a9ed);color:#06131d;box-shadow:0 12px 30px rgba(84,214,200,.18)}.secondary{background:rgba(255,255,255,.05);border:1px solid var(--line);color:var(--text)}.danger{background:rgba(255,107,122,.12);border:1px solid rgba(255,107,122,.25);color:#ff9daa}.primary:hover,.secondary:hover,.danger:hover,.category:hover{transform:translateY(-2px)}
+.globe-card{position:relative;height:400px;border:1px solid var(--line);border-radius:32px;background:linear-gradient(145deg,rgba(18,40,64,.8),rgba(8,19,33,.9));overflow:hidden;box-shadow:var(--shadow)}.globe{position:absolute;width:300px;height:300px;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle at 35% 30%,#6be4d7 0 4%,#277c89 17%,#11334c 52%,#091625 75%);box-shadow:inset -25px -25px 70px rgba(0,0,0,.45),0 0 90px rgba(84,214,200,.13)}.globe:before,.globe:after{content:"";position:absolute;inset:18px;border:1px solid rgba(160,255,245,.25);border-radius:50%}.globe:after{inset:55px;border-left-color:transparent;border-right-color:transparent;transform:rotate(32deg)}.lat{position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(160,255,245,.2)}.pin{position:absolute;width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px var(--gold)}.p1{left:33%;top:38%}.p2{left:61%;top:48%}.p3{left:48%;top:64%}.p4{left:69%;top:29%}.float{position:absolute;background:rgba(8,19,33,.88);border:1px solid var(--line);backdrop-filter:blur(12px);border-radius:16px;padding:12px 14px;font-size:12px;color:var(--muted);box-shadow:var(--shadow)}.float strong{display:block;color:var(--text);font-size:15px}.f1{left:18px;top:22px}.f2{right:18px;bottom:22px}.f3{right:22px;top:78px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;padding-bottom:60px}.stat{padding:20px;border:1px solid var(--line);background:rgba(255,255,255,.025);border-radius:18px}.stat b{font-size:26px}.stat span{display:block;color:var(--muted);font-size:12px;margin-top:5px}
+.section{padding:30px 0 75px}.section-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:22px}.section h2{font-size:34px;letter-spacing:-.04em;margin:0}.section-head p{color:var(--muted);margin:6px 0 0}.categories{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}.category{padding:20px;border:1px solid var(--line);background:linear-gradient(145deg,rgba(255,255,255,.045),rgba(255,255,255,.015));border-radius:20px;transition:.2s}.category .icon{font-size:28px;margin-bottom:18px}.category h3{margin:0 0 6px}.category p{margin:0;color:var(--muted);font-size:13px;line-height:1.5}.category small{display:block;color:var(--accent);margin-top:12px;font-weight:700}
+.panel{border:1px solid var(--line);background:rgba(13,27,45,.82);border-radius:24px;padding:24px;box-shadow:var(--shadow)}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:22px}.toolbar input,.toolbar select,.auth input{width:100%;background:rgba(255,255,255,.045);border:1px solid var(--line);color:var(--text);padding:12px 14px;border-radius:12px;outline:none}.toolbar input{max-width:320px}.toolbar select{max-width:220px}.toolbar input:focus,.toolbar select:focus,.auth input:focus{border-color:rgba(84,214,200,.5)}
+.quiz-wrap{padding:45px 0 90px;min-height:650px}.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.back{color:var(--muted);background:none;border:0}.progress{height:7px;background:rgba(255,255,255,.07);border-radius:20px;overflow:hidden;margin-bottom:28px}.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:.35s}.quiz-card{max-width:840px;margin:auto;padding:34px;border:1px solid var(--line);border-radius:28px;background:rgba(13,27,45,.82);box-shadow:var(--shadow)}.qmeta{color:var(--accent);font-size:12px;font-weight:800}.quiz-card h2{font-size:31px;line-height:1.2;margin:13px 0 25px;letter-spacing:-.03em}.options{display:grid;gap:11px}.option{display:flex;align-items:center;gap:14px;text-align:left;width:100%;padding:16px;border:1px solid var(--line);border-radius:15px;background:rgba(255,255,255,.025);color:var(--text);transition:.18s}.option:hover:not(:disabled){border-color:rgba(84,214,200,.45);background:rgba(84,214,200,.06)}.letter{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:rgba(255,255,255,.07);color:var(--muted);font-weight:800;flex:0 0 auto}.option.correct{border-color:rgba(84,214,200,.7);background:rgba(84,214,200,.1)}.option.correct .letter{background:var(--accent);color:#06131d}.option.wrong{border-color:rgba(255,107,122,.6);background:rgba(255,107,122,.08)}.option.wrong .letter{background:var(--danger);color:white}.feedback{margin-top:17px;padding:14px;border-radius:14px;background:rgba(255,255,255,.04);color:var(--muted);line-height:1.55}.feedback b{color:var(--text)}.quiz-footer{display:flex;justify-content:space-between;align-items:center;margin-top:24px;color:var(--muted);font-size:13px}.difficulty{display:inline-block;padding:4px 8px;border-radius:999px;background:rgba(124,108,255,.14);color:#bdb5ff;margin-left:6px}
+.result{text-align:center;max-width:760px;margin:auto}.score-ring{width:170px;height:170px;border-radius:50%;margin:10px auto 25px;display:grid;place-items:center;position:relative}.score-ring:after{content:"";position:absolute;inset:12px;background:var(--panel);border-radius:50%}.score-number{position:relative;z-index:1;font-size:42px;font-weight:900}.result h2{font-size:40px;margin:0 0 8px}.result p{color:var(--muted);line-height:1.6}.result-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:28px 0}.result-stats div{padding:16px;border:1px solid var(--line);border-radius:15px}.result-stats b{display:block;font-size:22px}.result-stats span{font-size:11px;color:var(--muted)}
+.profile-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:16px}.profile-card{display:flex;gap:18px;align-items:center}.avatar{width:76px;height:76px;border-radius:22px;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:36px}.profile-card h2{margin:0}.profile-card p{margin:5px 0;color:var(--muted)}.levelbar{height:9px;background:rgba(255,255,255,.07);border-radius:20px;overflow:hidden;margin-top:10px}.levelbar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0}.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.mini{padding:17px;border:1px solid var(--line);border-radius:16px}.mini b{font-size:24px}.mini span{display:block;color:var(--muted);font-size:11px;margin-top:4px}
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.badge{padding:15px;border:1px solid var(--line);border-radius:16px;text-align:center}.badge.locked{opacity:.35}.badge div{font-size:28px}.badge b{display:block;margin-top:6px;font-size:13px}.badge span{font-size:10px;color:var(--muted)}
+.auth{max-width:440px;margin:60px auto}.auth h2{font-size:32px;margin:0 0 6px}.auth p{color:var(--muted);line-height:1.5}.auth form{display:grid;gap:11px;margin-top:20px}.auth .hint{font-size:12px;color:var(--muted)}.switch{background:none;border:0;color:var(--accent);padding:0}.notice{padding:12px 14px;border-radius:12px;background:rgba(84,214,200,.08);border:1px solid rgba(84,214,200,.2);color:#b8fff7;font-size:13px}
+.leaderboard{width:100%;border-collapse:collapse}.leaderboard th,.leaderboard td{text-align:left;padding:13px 10px;border-bottom:1px solid var(--line)}.leaderboard th{color:var(--muted);font-size:11px;text-transform:uppercase}.rank{font-weight:900;color:var(--gold)}
+.daily{display:grid;grid-template-columns:1.4fr .6fr;gap:16px}.daily .big{font-size:25px;font-weight:800}.daily p{color:var(--muted);line-height:1.55}
+footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:13px;display:flex;justify-content:space-between}
+.toast{position:fixed;right:18px;bottom:18px;z-index:99;padding:13px 16px;border-radius:14px;background:#12243a;border:1px solid var(--line);box-shadow:var(--shadow);max-width:340px}
+@media(max-width:900px){.hero{grid-template-columns:1fr}.categories{grid-template-columns:repeat(2,1fr)}.stats{grid-template-columns:repeat(2,1fr)}.profile-grid,.daily{grid-template-columns:1fr}.navlinks button:nth-child(-n+2){display:none}}
+@media(max-width:600px){.container{width:min(100% - 22px,1180px)}.categories,.stats,.result-stats,.badges,.mini-stats{grid-template-columns:1fr}.hero{padding-top:35px}.globe-card{height:330px}.globe{width:240px;height:240px}.quiz-card{padding:22px}.quiz-card h2{font-size:25px}.navlinks button{padding:8px 10px}.section h2{font-size:28px}footer{flex-direction:column;gap:8px}}
 </style>
 </head>
 <body>
 <div id="app">
-  <header class="container">
-    <nav>
-      <a class="brand" href="#" onclick="showHome()"><span class="logo">W</span>WorldWise</a>
-      <div class="navlinks"><a href="#categories">Explore</a><a href="#about">How it works</a><a class="navbtn" href="#" onclick="startQuiz('mixed')">Play quiz</a></div>
-    </nav>
-  </header>
+<header class="container">
+<nav>
+<a class="brand" href="#" onclick="showHome()"><span class="logo">W</span>WorldWise <span style="font-size:11px;color:var(--accent);letter-spacing:.08em">V2</span></a>
+<div class="navlinks">
+<button onclick="showSection('categories')">Explore</button>
+<button onclick="showProfile()">Profile</button>
+<button id="authNav" class="navbtn" onclick="showAuth()">Sign in</button>
+</div>
+</nav>
+</header>
 
-  <main id="home">
-    <section class="container hero">
-      <div>
-        <div class="eyebrow"><span class="dot"></span> The world's knowledge, one question at a time</div>
-        <h1>How well do you <span class="gradient">know the world?</span></h1>
-        <p>Challenge yourself with questions about countries, capitals, flags, cultures, geography, history and the remarkable places that make our planet unique.</p>
-        <div class="actions">
-          <button class="primary" onclick="startQuiz('mixed')">Start the quiz →</button>
-          <button class="secondary" onclick="document.getElementById('categories').scrollIntoView()">Explore categories</button>
-        </div>
-      </div>
-      <div class="globe-card" aria-label="Stylized world globe">
-        <div class="globe"><span class="lat"></span><i class="pin p1"></i><i class="pin p2"></i><i class="pin p3"></i><i class="pin p4"></i></div>
-        <div class="float f1"><strong>195+</strong> countries to discover</div>
-        <div class="float f2"><strong>1,000s</strong> of facts & questions</div>
-        <div class="float f3"><strong>Global</strong> knowledge</div>
-      </div>
-    </section>
-    <section class="container stats">
-      <div class="stat"><b>195+</b><span>Countries represented</span></div>
-      <div class="stat"><b>8</b><span>Knowledge categories</span></div>
-      <div class="stat"><b>∞</b><span>Ways to learn something new</span></div>
-    </section>
+<main id="home">
+<section class="container hero">
+<div>
+<div class="eyebrow"><span class="dot"></span> The world's knowledge, one question at a time</div>
+<h1>How well do you <span class="gradient">know the world?</span></h1>
+<p>WorldWise V2 turns global knowledge into a game. Explore geography, capitals, flags, culture, history, food, wildlife, landmarks, languages, sports, currencies and more.</p>
+<div class="actions">
+<button class="primary" onclick="startQuiz('mixed')">Start a challenge →</button>
+<button class="secondary" onclick="showSection('categories')">Explore topics</button>
+</div>
+</div>
+<div class="globe-card">
+<div class="globe"><span class="lat"></span><i class="pin p1"></i><i class="pin p2"></i><i class="pin p3"></i><i class="pin p4"></i></div>
+<div class="float f1"><strong>12</strong> knowledge topics</div>
+<div class="float f2"><strong>80+</strong> starter questions</div>
+<div class="float f3"><strong>XP + badges</strong> keep learning</div>
+</div>
+</section>
 
-    <section id="categories" class="container section">
-      <div class="section-head"><div><h2>Choose your challenge</h2><p>Pick a topic or let WorldWise surprise you.</p></div></div>
-      <div class="categories">
-        <div class="category" onclick="startQuiz('geography')"><div class="icon">🗺️</div><h3>Geography</h3><p>Continents, borders, mountains, oceans and places.</p></div>
-        <div class="category" onclick="startQuiz('capitals')"><div class="icon">🏛️</div><h3>Capitals</h3><p>Put your knowledge of world capitals to the test.</p></div>
-        <div class="category" onclick="startQuiz('culture')"><div class="icon">🎭</div><h3>Culture</h3><p>Traditions, languages, food and fascinating customs.</p></div>
-        <div class="category" onclick="startQuiz('flags')"><div class="icon">🚩</div><h3>Flags</h3><p>Recognize the colors and symbols of nations.</p></div>
-      </div>
-    </section>
-    <section id="about" class="container section">
-      <div class="section-head"><div><h2>Learn by playing</h2><p>Every question is designed to teach you something worth remembering.</p></div></div>
-      <div class="categories">
-        <div class="category"><div class="icon">⚡</div><h3>Fast rounds</h3><p>Short, focused quiz sessions you can finish anywhere.</p></div>
-        <div class="category"><div class="icon">🌐</div><h3>Think globally</h3><p>Discover countries and perspectives beyond your everyday map.</p></div>
-        <div class="category"><div class="icon">🏆</div><h3>Build your score</h3><p>Track accuracy and challenge yourself to beat your best.</p></div>
-        <div class="category"><div class="icon">💡</div><h3>Learn from answers</h3><p>Instant explanations turn every answer into a mini lesson.</p></div>
-      </div>
-    </section>
-  </main>
+<section class="container stats">
+<div class="stat"><b>12</b><span>Knowledge categories</span></div>
+<div class="stat"><b>80+</b><span>Questions included</span></div>
+<div class="stat"><b>10</b><span>Achievements</span></div>
+<div class="stat"><b>∞</b><span>Replayable quizzes</span></div>
+</section>
 
-  <main id="quiz" class="hidden">
-    <section class="container quiz-wrap">
-      <div class="quiz-top"><button class="back" onclick="showHome()">← Back to WorldWise</button><span id="scoreLabel">Score: 0</span></div>
-      <div class="progress"><i id="progressBar"></i></div>
-      <div id="quizContent"></div>
-    </section>
-  </main>
+<section id="categories" class="container section">
+<div class="section-head"><div><h2>Choose your challenge</h2><p>Pick a topic or let WorldWise surprise you.</p></div></div>
+<div id="categoryGrid" class="categories"></div>
+</section>
 
-  <footer class="container"><span>© 2026 WorldWise</span><span>Know more. Go further.</span></footer>
+<section class="container section">
+<div class="daily panel">
+<div><div class="eyebrow">Daily challenge</div><div class="big" id="dailyTitle">One question. One global fact. Every day.</div><p id="dailyText">Complete today's challenge for bonus XP. The challenge is generated from the same WorldWise question bank and can only award its bonus once per day.</p></div>
+<div style="display:flex;align-items:center;justify-content:center"><button class="primary" onclick="startDaily()">Take today's challenge →</button></div>
+</div>
+</section>
+
+<section id="about" class="container section">
+<div class="section-head"><div><h2>Learn by playing</h2><p>Correct answers earn XP, while explanations turn mistakes into mini-lessons.</p></div></div>
+<div class="categories">
+<div class="category"><div class="icon">⚡</div><h3>Fast rounds</h3><p>Short quizzes you can finish anywhere.</p></div>
+<div class="category"><div class="icon">🧠</div><h3>Multiple difficulties</h3><p>Easy, medium and hard questions keep the game challenging.</p></div>
+<div class="category"><div class="icon">🏆</div><h3>Build your profile</h3><p>Earn XP, levels, badges and personal statistics.</p></div>
+<div class="category"><div class="icon">💡</div><h3>Learn from answers</h3><p>Every question includes a short explanation.</p></div>
+</div>
+</section>
+</main>
+
+<main id="quiz" class="hidden"><section class="container quiz-wrap">
+<div class="quiz-top"><button class="back" onclick="showHome()">← Back to WorldWise</button><span id="scoreLabel">0 XP</span></div>
+<div class="progress"><i id="progressBar"></i></div><div id="quizContent"></div>
+</section></main>
+
+<main id="profile" class="hidden"><section class="container section">
+<div class="section-head"><div><h2>Your WorldWise profile</h2><p>Your progress is stored in this browser until real account sync is connected.</p></div><button class="secondary" onclick="showHome()">← Home</button></div>
+<div id="profileContent"></div>
+</section></main>
+
+<main id="leaderboard" class="hidden"><section class="container section">
+<div class="section-head"><div><h2>Leaderboard</h2><p>Local profiles on this device.</p></div></div><div class="panel" id="leaderboardContent"></div>
+</section></main>
+
+<main id="auth" class="hidden"><section class="container">
+<div class="auth panel" id="authContent"></div>
+</section></main>
+
+<footer class="container"><span>© 2026 WorldWise V2</span><span>Know more. Go further. 🌎</span></footer>
 </div>
 
+<div id="toast" class="toast hidden"></div>
+
 <script>
-const banks = {
- mixed:[
-  {q:"Which country has the largest land area in the world?",o:["Canada","China","Russia","United States"],a:2,e:"Russia covers more land area than any other country, spanning Eastern Europe and northern Asia."},
-  {q:"What is the capital city of Japan?",o:["Kyoto","Tokyo","Osaka","Sapporo"],a:1,e:"Tokyo is Japan's capital and one of the world's largest metropolitan areas."},
-  {q:"Which continent is the Sahara Desert located in?",o:["Asia","Africa","South America","Australia"],a:1,e:"The Sahara stretches across much of northern Africa."},
-  {q:"Which country is famous for the ancient city of Petra?",o:["Jordan","Egypt","Greece","Morocco"],a:0,e:"Petra is an ancient archaeological city in southern Jordan, famous for its rock-cut architecture."},
-  {q:"Which language has the most native speakers worldwide?",o:["English","Spanish","Mandarin Chinese","Hindi"],a:2,e:"Mandarin Chinese has the largest number of native speakers."},
-  {q:"Which country is home to Mount Kilimanjaro?",o:["Kenya","Tanzania","Uganda","Ethiopia"],a:1,e:"Mount Kilimanjaro is in Tanzania and is Africa's highest mountain."}
- ],
- geography:[
-  {q:"Which is the world's largest ocean?",o:["Atlantic Ocean","Indian Ocean","Pacific Ocean","Arctic Ocean"],a:2,e:"The Pacific Ocean is the largest and deepest of Earth's five oceanic divisions."},
-  {q:"Which river is traditionally recognized as the longest in Africa?",o:["Congo","Nile","Zambezi","Niger"],a:1,e:"The Nile flows north through northeastern Africa and empties into the Mediterranean Sea."},
-  {q:"Which country contains the Atacama Desert?",o:["Peru","Chile","Bolivia","Argentina"],a:1,e:"The Atacama Desert lies primarily in northern Chile along the Pacific coast."},
-  {q:"What is the largest island in the world?",o:["Borneo","Madagascar","Greenland","New Guinea"],a:2,e:"Greenland is the world's largest island when Australia is classified as a continent."}
- ],
- capitals:[
-  {q:"What is the capital of Kenya?",o:["Nairobi","Mombasa","Kampala","Addis Ababa"],a:0,e:"Nairobi is the capital and largest city of Kenya."},
-  {q:"What is the capital of Brazil?",o:["Rio de Janeiro","São Paulo","Brasília","Salvador"],a:2,e:"Brasília has been Brazil's capital since 1960."},
-  {q:"What is the capital of Australia?",o:["Sydney","Melbourne","Canberra","Perth"],a:2,e:"Canberra is Australia's capital, located between Sydney and Melbourne."},
-  {q:"What is the capital of Canada?",o:["Toronto","Vancouver","Ottawa","Montreal"],a:2,e:"Ottawa, in Ontario, is Canada's national capital."}
- ],
- culture:[
-  {q:"Which country is widely associated with the traditional dance called the tango?",o:["Spain","Argentina","Mexico","Portugal"],a:1,e:"Tango developed in the Río de la Plata region, especially in Argentina and Uruguay."},
-  {q:"Which country is the origin of sushi as a major culinary tradition?",o:["Japan","Thailand","Vietnam","South Korea"],a:0,e:"Modern sushi is strongly associated with Japanese cuisine and culinary history."},
-  {q:"Diwali is commonly known as what?",o:["Festival of Lights","Festival of Harvest","Festival of Water","Festival of Spring"],a:0,e:"Diwali is widely known as the Festival of Lights and is celebrated by millions of people."},
-  {q:"Which country is associated with the traditional Māori culture?",o:["Fiji","New Zealand","Samoa","Papua New Guinea"],a:1,e:"The Māori are the Indigenous Polynesian people of New Zealand."}
- ],
- flags:[
-  {q:"Which country has a maple leaf on its national flag?",o:["Canada","Austria","Switzerland","Denmark"],a:0,e:"Canada's red-and-white flag features a stylized eleven-point maple leaf."},
-  {q:"Which country has a flag featuring a white crescent and star on a green field?",o:["Pakistan","Algeria","Turkey","Tunisia"],a:0,e:"Pakistan's flag has a dark green field with a white crescent and five-pointed star."},
-  {q:"Which country has a flag with a red circle centered on a white field?",o:["Japan","Bangladesh","Palau","Indonesia"],a:0,e:"Japan's national flag features a crimson disc representing the sun on a white field."},
-  {q:"Which country has a blue-and-white flag with a Star of David?",o:["Israel","Greece","Finland","Estonia"],a:0,e:"Israel's flag is white with two horizontal blue stripes and a blue Star of David."}
- ]
+const categories=[
+{id:'geography',icon:'🗺️',name:'Geography',desc:'Continents, oceans, borders, mountains and places.'},
+{id:'capitals',icon:'🏛️',name:'Capitals',desc:'Test your knowledge of cities that lead nations.'},
+{id:'flags',icon:'🚩',name:'Flags',desc:'Colors, symbols and national flags.'},
+{id:'culture',icon:'🎭',name:'Culture',desc:'Traditions, languages, celebrations and customs.'},
+{id:'history',icon:'🏺',name:'History',desc:'Ancient civilizations, events and people.'},
+{id:'food',icon:'🍜',name:'Food',desc:'Dishes, ingredients and culinary traditions.'},
+{id:'wildlife',icon:'🦁',name:'Wildlife & Nature',desc:'Animals, ecosystems, parks and natural wonders.'},
+{id:'landmarks',icon:'🗿',name:'Landmarks',desc:'Famous buildings, monuments and places.'},
+{id:'languages',icon:'🗣️',name:'Languages',desc:'Words, scripts, language families and speakers.'},
+{id:'sports',icon:'⚽',name:'Sports',desc:'Global games, competitions and sporting facts.'},
+{id:'currencies',icon:'💰',name:'Currencies',desc:'Money used around the world.'},
+{id:'continents',icon:'🌍',name:'Continents',desc:'World regions and continental knowledge.'}
+];
+
+const banks={
+geography:[
+['Which is the largest ocean?',['Atlantic','Indian','Pacific','Arctic'],2,'The Pacific Ocean is the largest ocean on Earth.','easy'],
+['Which river flows through Egypt?',['Amazon','Nile','Danube','Yangtze'],1,'The Nile flows north through Egypt into the Mediterranean Sea.','easy'],
+['Which country contains the Atacama Desert?',['Chile','India','Morocco','Mexico'],0,'The Atacama Desert is primarily in northern Chile.','medium'],
+['What is the largest island in the world?',['Borneo','Madagascar','Greenland','New Guinea'],2,'Greenland is the world’s largest island.','easy'],
+['Which mountain range includes Mount Everest?',['Andes','Alps','Himalayas','Rockies'],2,'Mount Everest is part of the Himalayan range.','easy'],
+['Which sea separates Europe and Africa?',['Caribbean Sea','Mediterranean Sea','Arabian Sea','Baltic Sea'],1,'The Mediterranean lies between Europe, Africa and Asia.','easy'],
+['Which country is completely surrounded by South Africa?',['Lesotho','Eswatini','Botswana','Namibia'],0,'Lesotho is an enclave entirely surrounded by South Africa.','hard']
+],
+capitals:[
+['What is the capital of Kenya?',['Nairobi','Mombasa','Kisumu','Kampala'],0,'Nairobi is Kenya’s capital.','easy'],
+['What is the capital of Brazil?',['Rio de Janeiro','São Paulo','Brasília','Salvador'],2,'Brasília became Brazil’s capital in 1960.','easy'],
+['What is the capital of Australia?',['Sydney','Melbourne','Canberra','Perth'],2,'Canberra is Australia’s capital.','easy'],
+['What is the capital of Canada?',['Toronto','Ottawa','Vancouver','Montreal'],1,'Ottawa is Canada’s national capital.','easy'],
+['What is the capital of Morocco?',['Casablanca','Marrakesh','Rabat','Fez'],2,'Rabat is Morocco’s capital.','medium'],
+['What is the capital of Mongolia?',['Astana','Ulaanbaatar','Bishkek','Tashkent'],1,'Ulaanbaatar is Mongolia’s capital.','medium'],
+['What is the capital of Bhutan?',['Thimphu','Kathmandu','Dhaka','Colombo'],0,'Thimphu is Bhutan’s capital.','medium']
+],
+flags:[
+['Which flag has a maple leaf?',['Canada','Austria','Denmark','Switzerland'],0,'Canada’s flag features a red maple leaf.','easy'],
+['Which country has a red circle on a white flag?',['Japan','Bangladesh','Palau','Indonesia'],0,'Japan’s flag features a red disc representing the sun.','easy'],
+['Which country has a cedar tree on its flag?',['Lebanon','Cyprus','Jordan','Tunisia'],0,'Lebanon’s flag contains a green cedar tree.','medium'],
+['Which country has a dragon on its national flag?',['Bhutan','Nepal','Wales','China'],0,'Bhutan’s national flag features a white dragon.','medium'],
+['Which national flag is the only non-rectangular one?',['Nepal','Switzerland','Vatican City','Bhutan'],0,'Nepal’s flag is made of two stacked triangular pennants.','hard'],
+['Which country has a blue Star of David on its flag?',['Israel','Greece','Estonia','Uruguay'],0,'Israel’s flag features a blue Star of David.','easy']
+],
+culture:[
+['Tango is strongly associated with which country?',['Spain','Argentina','Mexico','Portugal'],1,'Tango developed around the Río de la Plata, especially Argentina and Uruguay.','easy'],
+['Diwali is commonly called the Festival of what?',['Water','Lights','Harvest','Music'],1,'Diwali is widely known as the Festival of Lights.','easy'],
+['Māori are Indigenous to which country?',['Fiji','New Zealand','Samoa','Tonga'],1,'Māori are the Indigenous Polynesian people of New Zealand.','easy'],
+['Hanami is a Japanese tradition associated with viewing what?',['Snow','Cherry blossoms','Fireworks','Autumn leaves'],1,'Hanami is the tradition of enjoying seasonal cherry blossoms.','medium'],
+['Which country is famous for the Day of the Dead tradition?',['Mexico','Peru','Spain','Cuba'],0,'Día de los Muertos is a Mexican tradition honoring deceased loved ones.','easy'],
+['Kente cloth is strongly associated with which country?',['Ghana','Kenya','Morocco','Egypt'],0,'Kente is a colorful woven textile strongly associated with Ghana.','medium']
+],
+history:[
+['Which ancient civilization built Machu Picchu?',['Romans','Inca','Maya','Vikings'],1,'Machu Picchu was built by the Inca civilization in the Andes.','easy'],
+['The ancient city of Petra is in which modern country?',['Egypt','Jordan','Greece','Turkey'],1,'Petra is an archaeological city in southern Jordan.','easy'],
+['Which empire built the Colosseum?',['Roman Empire','Mali Empire','Ottoman Empire','Mughal Empire'],0,'The Colosseum was built in ancient Rome.','easy'],
+['The Great Zimbabwe ruins are in which country?',['Zambia','Zimbabwe','Botswana','Namibia'],1,'Great Zimbabwe is a major medieval stone complex in modern Zimbabwe.','medium'],
+['Which civilization developed cuneiform writing?',['Sumerians','Aztecs','Inca','Phoenicians'],0,'The Sumerians of ancient Mesopotamia developed cuneiform writing.','hard'],
+['The Silk Road connected East Asia with which broad region?',['Only Australia','Europe and the Middle East','Only Antarctica','Only North America'],1,'The Silk Road network linked East Asia with Central Asia, the Middle East and Europe.','medium']
+],
+food:[
+['Sushi is most strongly associated with which country?',['Japan','Thailand','Vietnam','India'],0,'Sushi is a major part of Japanese culinary tradition.','easy'],
+['Paella is associated with which country?',['Italy','Spain','Greece','Portugal'],1,'Paella originated in Spain, especially Valencia.','easy'],
+['Which country is famous for injera?',['Ethiopia','Brazil','Canada','Japan'],0,'Injera is a fermented flatbread central to Ethiopian cuisine.','easy'],
+['Kimchi is a traditional food of which country?',['South Korea','Mongolia','Nepal','Laos'],0,'Kimchi is a staple of Korean cuisine.','easy'],
+['Which fruit is traditionally used in guacamole?',['Mango','Avocado','Pineapple','Papaya'],1,'Avocado is the key ingredient in traditional guacamole.','easy'],
+['Couscous is strongly associated with which region?',['North Africa','Scandinavia','Oceania','South America'],0,'Couscous is a staple food across North Africa.','medium']
+],
+wildlife:[
+['Which animal is the largest land animal?',['Elephant','Giraffe','Rhino','Hippo'],0,'African elephants are the largest land animals.','easy'],
+['Which is the fastest land animal?',['Lion','Cheetah','Leopard','Gazelle'],1,'The cheetah can reach very high speeds over short distances.','easy'],
+['The Galápagos Islands are famous for which animal?',['Giant tortoises','Polar bears','Kangaroos','Pandas'],0,'Galápagos giant tortoises are iconic island species.','easy'],
+['Which ecosystem is characterized by very low rainfall?',['Rainforest','Desert','Wetland','Mangrove'],1,'Deserts receive very little precipitation.','easy'],
+['Which animal is a marsupial?',['Koala','Tiger','Eagle','Crocodile'],0,'Koalas are marsupials native to Australia.','medium'],
+['Victoria Falls lies on which river?',['Nile','Zambezi','Congo','Limpopo'],1,'Victoria Falls is on the Zambezi River on the Zambia-Zimbabwe border.','medium']
+],
+landmarks:[
+['The Eiffel Tower is in which city?',['Rome','Paris','Madrid','Vienna'],1,'The Eiffel Tower is one of Paris’s best-known landmarks.','easy'],
+['The Taj Mahal is in which country?',['India','Pakistan','Bangladesh','Nepal'],0,'The Taj Mahal is in Agra, India.','easy'],
+['Christ the Redeemer overlooks which city?',['Lima','Rio de Janeiro','Buenos Aires','Santiago'],1,'Christ the Redeemer overlooks Rio de Janeiro.','easy'],
+['The Pyramids of Giza are near which city?',['Cairo','Alexandria','Luxor','Aswan'],0,'The Giza pyramid complex is near Cairo, Egypt.','easy'],
+['The Burj Khalifa is in which city?',['Doha','Dubai','Abu Dhabi','Manama'],1,'The Burj Khalifa is in Dubai, United Arab Emirates.','easy'],
+['Angkor Wat is in which country?',['Cambodia','Thailand','Vietnam','Myanmar'],0,'Angkor Wat is a major temple complex in Cambodia.','medium']
+],
+languages:[
+['Which language has the most native speakers?',['English','Mandarin Chinese','Spanish','Arabic'],1,'Mandarin Chinese has the largest number of native speakers.','easy'],
+['Spanish is a Romance language descended largely from which ancient language?',['Latin','Greek','Sanskrit','Arabic'],0,'Spanish developed from Vulgar Latin.','medium'],
+['Which writing system is used for modern Japanese alongside others?',['Kana','Cyrillic','Hangul only','Ge’ez only'],0,'Japanese uses kana together with kanji.','medium'],
+['Arabic is written primarily in which direction?',['Left to right','Right to left','Top to bottom','Bottom to top'],1,'Arabic script is generally written right to left.','easy'],
+['Which language is widely spoken in Brazil?',['Portuguese','Spanish','French','Italian'],0,'Portuguese is Brazil’s official language.','easy'],
+['Swahili is widely spoken in which part of Africa?',['East Africa','West Africa','North Africa only','Southern Europe'],0,'Swahili is widely used across East Africa.','easy']
+],
+sports:[
+['Which sport uses a shuttlecock?',['Tennis','Badminton','Cricket','Hockey'],1,'Badminton is played with a shuttlecock.','easy'],
+['How many players are on the field for one soccer team at a time?',['9','10','11','12'],2,'A standard soccer team has 11 players on the field.','easy'],
+['The Tour de France is associated with which sport?',['Cycling','Running','Swimming','Skiing'],0,'The Tour de France is a famous cycling stage race.','easy'],
+['Which country is famous for the haka before rugby matches?',['New Zealand','Ireland','Japan','Fiji'],0,'New Zealand’s All Blacks are famous for performing a haka.','medium'],
+['Which sport is Wimbledon associated with?',['Golf','Tennis','Cricket','Rugby'],1,'Wimbledon is one of tennis’s four Grand Slam tournaments.','easy'],
+['In basketball, how many points is a free throw worth?',['1','2','3','4'],0,'A successful free throw is worth one point.','easy']
+],
+currencies:[
+['What is the currency of Japan?',['Won','Yen','Yuan','Ringgit'],1,'Japan uses the yen.','easy'],
+['What is the currency of the United Kingdom?',['Euro','Pound sterling','Franc','Krone'],1,'The UK uses pound sterling.','easy'],
+['What is the currency of South Africa?',['Rand','Shilling','Dinar','Pula'],0,'South Africa uses the rand.','easy'],
+['What is the currency of India?',['Rupee','Rupiah','Taka','Peso'],0,'India uses the Indian rupee.','easy'],
+['What is the currency of Zambia?',['Kwacha','Rand','Shilling','Pula'],0,'Zambia uses the Zambian kwacha.','easy'],
+['What is the currency of Botswana?',['Pula','Metical','Kwacha','Naira'],0,'Botswana uses the pula.','medium']
+],
+continents:[
+['Which continent has the most countries?',['Africa','Asia','Europe','South America'],0,'Africa is generally counted as having the most sovereign countries.','easy'],
+['Which is the smallest continent by land area?',['Europe','Australia/Oceania','Antarctica','South America'],1,'Australia is the smallest continent by conventional land-area classification.','medium'],
+['Which continent contains the Amazon rainforest?',['Africa','Asia','South America','North America'],2,'The Amazon rainforest is primarily in South America.','easy'],
+['Which continent contains the Sahara?',['Africa','Asia','Europe','Australia'],0,'The Sahara spans much of northern Africa.','easy'],
+['Which continent surrounds the South Pole?',['Europe','Antarctica','Asia','North America'],1,'Antarctica surrounds the South Pole.','easy'],
+['Which continent is also a country?',['Europe','Australia','Africa','Asia'],1,'Australia is both a country and a continental landmass in common geographic usage.','medium']
+]
 };
 
-let state={category:'mixed',questions:[],index:0,score:0,answered:false};
-
-function showHome(){
- document.getElementById('home').classList.remove('hidden');
- document.getElementById('quiz').classList.add('hidden');
- window.scrollTo({top:0,behavior:'smooth'});
+function buildBanks(){
+  banks.mixed=Object.values(banks).filter(v=>Array.isArray(v)).flat().map(x=>[x[0],x[1],x[2],x[3],x[4]]);
 }
-function startQuiz(category){
- state={category,questions:[...banks[category]].sort(()=>Math.random()-.5),index:0,score:0,answered:false};
- document.getElementById('home').classList.add('hidden');
- document.getElementById('quiz').classList.remove('hidden');
- window.scrollTo({top:0,behavior:'smooth'});
- renderQuestion();
+buildBanks();
+
+const badgeDefs=[
+{id:'first',icon:'🌱',name:'First Steps',desc:'Finish your first quiz.',ok:p=>p.quizzes>=1},
+{id:'hundred',icon:'💯',name:'Century',desc:'Earn 100 XP.',ok:p=>p.xp>=100},
+{id:'explorer',icon:'🧭',name:'Explorer',desc:'Answer 25 questions.',ok:p=>p.answered>=25},
+{id:'scholar',icon:'🎓',name:'Scholar',desc:'Answer 75 questions.',ok:p=>p.answered>=75},
+{id:'perfect',icon:'💎',name:'Perfect Round',desc:'Get a perfect quiz.',ok:p=>p.perfectRounds>=1},
+{id:'streak',icon:'🔥',name:'On Fire',desc:'Reach a 3-day streak.',ok:p=>p.streak>=3},
+{id:'globe',icon:'🌍',name:'Global Mind',desc:'Try 6 different topics.',ok:p=>Object.keys(p.topicStats).length>=6},
+{id:'master',icon:'🏆',name:'WorldWise Master',desc:'Earn 1,000 XP.',ok:p=>p.xp>=1000}
+];
+
+const defaultProfile=()=>({name:'Explorer',email:'',xp:0,answered:0,correct:0,quizzes:0,perfectRounds:0,streak:0,lastDay:'',dailyDone:'',topicStats:{},badges:[]});
+let profile=loadProfile();
+let state={category:'mixed',questions:[],index:0,score:0,correct:0,answered:false,daily:false};
+
+function loadProfile(){try{return JSON.parse(localStorage.getItem('worldwise_profile'))||defaultProfile()}catch{return defaultProfile()}}
+function saveProfile(){localStorage.setItem('worldwise_profile',JSON.stringify(profile));updateAuthNav()}
+function updateAuthNav(){const b=document.getElementById('authNav');if(!b)return;b.textContent=profile.email?'Log out':'Sign in';b.onclick=profile.email?logout:showAuth}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.remove('hidden');clearTimeout(window.__toast);window.__toast=setTimeout(()=>t.classList.add('hidden'),2600)}
+function hideAll(){['home','quiz','profile','auth','leaderboard'].forEach(id=>document.getElementById(id).classList.add('hidden'))}
+function showHome(){hideAll();document.getElementById('home').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'})}
+function showSection(id){showHome();setTimeout(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth'}),50)}
+function showProfile(){hideAll();document.getElementById('profile').classList.remove('hidden');renderProfile();window.scrollTo({top:0,behavior:'smooth'})}
+function showAuth(){hideAll();document.getElementById('auth').classList.remove('hidden');renderAuth('login')}
+function renderCategories(){
+ document.getElementById('categoryGrid').innerHTML=categories.map(c=>`<button class="category" onclick="startQuiz('${c.id}')"><div class="icon">${c.icon}</div><h3>${c.name}</h3><p>${c.desc}</p><small>${banks[c.id].length} questions</small></button>`).join('');
+}
+function renderAuth(mode){
+ const el=document.getElementById('authContent');
+ if(mode==='login'){
+  el.innerHTML=`<h2>Welcome back 🌎</h2><p>Sign in to your WorldWise profile on this device.</p>
+  <div class="notice">V2 currently saves profiles in this browser. Secure cross-device accounts can be connected to a backend in the next step.</div>
+  <form onsubmit="login(event)"><input id="loginEmail" type="email" placeholder="Email address" required><input id="loginName" placeholder="Display name" required><input id="loginPass" type="password" placeholder="Password" required><button class="primary">Sign in</button></form>
+  <p class="hint">New here? <button class="switch" onclick="renderAuth('signup')">Create a profile</button></p>`;
+ }else{
+  el.innerHTML=`<h2>Create your profile ✨</h2><p>Start earning XP and building your global knowledge profile.</p>
+  <form onsubmit="signup(event)"><input id="signupName" placeholder="Display name" maxlength="24" required><input id="signupEmail" type="email" placeholder="Email address" required><input id="signupPass" type="password" placeholder="Password" minlength="6" required><button class="primary">Create profile</button></form>
+  <p class="hint">Already have one? <button class="switch" onclick="renderAuth('login')">Sign in</button></p>`;
+ }
+}
+function signup(e){e.preventDefault();profile=defaultProfile();profile.name=document.getElementById('signupName').value.trim();profile.email=document.getElementById('signupEmail').value.trim().toLowerCase();saveProfile();toast('Profile created on this device.');showProfile()}
+function login(e){e.preventDefault();profile=loadProfile();profile.name=document.getElementById('loginName').value.trim()||profile.name;profile.email=document.getElementById('loginEmail').value.trim().toLowerCase();saveProfile();toast('Welcome back, '+profile.name+'!');showProfile()}
+function logout(){profile=defaultProfile();saveProfile();toast('Signed out. Your saved local profile remains available if you sign in again on this device.');showHome()}
+
+function startQuiz(category,daily=false){
+ const source=(banks[category]||banks.mixed).slice();
+ let questions=source.sort(()=>Math.random()-.5);
+ if(!daily && questions.length>10)questions=questions.slice(0,10);
+ state={category,questions,index:0,score:0,correct:0,answered:false,daily};
+ hideAll();document.getElementById('quiz').classList.remove('hidden');window.scrollTo({top:0,behavior:'smooth'});renderQuestion();
+}
+function startDaily(){
+ const day=new Date().toISOString().slice(0,10);
+ if(profile.dailyDone===day){toast('You already completed today’s challenge.');showProfile();return}
+ const all=banks.mixed;const idx=Math.floor(new Date().getTime()/86400000)%all.length;
+ state={category:'daily',questions:[all[idx]],index:0,score:0,correct:0,answered:false,daily:true};
+ hideAll();document.getElementById('quiz').classList.remove('hidden');renderQuestion();
 }
 function renderQuestion(){
- const total=state.questions.length, item=state.questions[state.index];
- state.answered=false;
- document.getElementById('scoreLabel').textContent=`Score: ${state.score}`;
+ const item=state.questions[state.index],total=state.questions.length;
+ document.getElementById('scoreLabel').textContent=`${state.score} XP`;
  document.getElementById('progressBar').style.width=`${(state.index/total)*100}%`;
- document.getElementById('quizContent').innerHTML=`
- <div class="quiz-card">
-   <div class="qmeta">QUESTION ${state.index+1} OF ${total} · ${state.category.toUpperCase()}</div>
-   <h2>${item.q}</h2>
-   <div class="options">${item.o.map((x,i)=>`<button class="option" onclick="answer(${i})"><span class="letter">${String.fromCharCode(65+i)}</span><span>${x}</span></button>`).join('')}</div>
-   <div id="feedback"></div>
-   <div class="quiz-footer"><span>${state.score} points</span><button id="nextBtn" class="primary hidden" onclick="nextQuestion()">Next question →</button></div>
- </div>`;
+ document.getElementById('quizContent').innerHTML=`<div class="quiz-card">
+ <div class="qmeta">QUESTION ${state.index+1} OF ${total} · ${state.category.toUpperCase()} <span class="difficulty">${item[4]}</span></div>
+ <h2>${item[0]}</h2>
+ <div class="options">${item[1].map((x,i)=>`<button class="option" onclick="answer(${i})"><span class="letter">${String.fromCharCode(65+i)}</span><span>${x}</span></button>`).join('')}</div>
+ <div id="feedback"></div><div class="quiz-footer"><span>${state.score} XP earned</span><button id="nextBtn" class="primary hidden" onclick="nextQuestion()">Next question →</button></div></div>`;
+ state.answered=false;
 }
 function answer(choice){
- if(state.answered)return;
- state.answered=true;
- const item=state.questions[state.index];
- const opts=document.querySelectorAll('.option');
- opts.forEach((el,i)=>{el.disabled=true;if(i===item.a)el.classList.add('correct');if(i===choice&&choice!==item.a)el.classList.add('wrong')});
- if(choice===item.a)state.score+=100;
- document.getElementById('scoreLabel').textContent=`Score: ${state.score}`;
- document.getElementById('feedback').innerHTML=`<div class="feedback"><b>${choice===item.a?'Correct!':'Not quite.'}</b> ${item.e}</div>`;
- document.getElementById('nextBtn').classList.remove('hidden');
- document.getElementById('progressBar').style.width=`${((state.index+1)/state.questions.length)*100}%`;
+ if(state.answered)return;state.answered=true;
+ const item=state.questions[state.index],opts=document.querySelectorAll('.option');
+ opts.forEach((el,i)=>{el.disabled=true;if(i===item[2])el.classList.add('correct');if(i===choice&&choice!==item[2])el.classList.add('wrong')});
+ const correct=choice===item[2];let gain=0;
+ if(correct){gain=item[4]==='hard'?150:item[4]==='medium'?120:100;state.score+=gain;state.correct++}
+ document.getElementById('scoreLabel').textContent=`${state.score} XP`;
+ document.getElementById('feedback').innerHTML=`<div class="feedback"><b>${correct?'Correct! +'+gain+' XP':'Not quite.'}</b> ${item[3]}</div>`;
+ document.getElementById('nextBtn').classList.remove('hidden');document.getElementById('progressBar').style.width=`${((state.index+1)/state.questions.length)*100}%`;
 }
-function nextQuestion(){
- state.index++;
- if(state.index>=state.questions.length){renderResult();return}
- renderQuestion();
-}
-function renderResult(){
- const total=state.questions.length, pct=Math.round((state.score/(total*100))*100);
+function nextQuestion(){state.index++;if(state.index>=state.questions.length){finishQuiz();return}renderQuestion()}
+function finishQuiz(){
+ const total=state.questions.length,pct=Math.round(state.correct/total*100);
+ if(state.daily){
+  profile.dailyDone=new Date().toISOString().slice(0,10);state.score+=250;
+ }
+ profile.xp+=state.score;profile.answered+=total;profile.correct+=state.correct;
+ if(total>0)profile.quizzes++;
+ if(pct===100)profile.perfectRounds++;
+ if(state.category!=='daily')profile.topicStats[state.category]=(profile.topicStats[state.category]||0)+1;
+ updateStreak();checkBadges();saveProfile();
  document.getElementById('progressBar').style.width='100%';
- document.getElementById('quizContent').innerHTML=`
- <div class="result">
-   <div class="score-ring" style="background:conic-gradient(var(--accent) 0 ${pct}%,rgba(255,255,255,.08) ${pct}% 100%)"><div class="score-number">${pct}%</div></div>
-   <h2>${pct>=80?'WorldWise explorer!':pct>=50?'Good global instincts!':'Keep exploring!'}</h2>
-   <p>You scored <strong>${state.score}</strong> out of <strong>${total*100}</strong>. Every question is another place, idea or fact added to your mental map.</p>
-   <div class="result-stats"><div><b>${state.score}</b><span>POINTS</span></div><div><b>${total}</b><span>QUESTIONS</span></div><div><b>${pct}%</b><span>ACCURACY</span></div></div>
-   <div class="actions" style="justify-content:center"><button class="primary" onclick="startQuiz('${state.category}')">Play again</button><button class="secondary" onclick="showHome()">Explore more</button></div>
- </div>`;
+ document.getElementById('quizContent').innerHTML=`<div class="result">
+ <div class="score-ring" style="background:conic-gradient(var(--accent) 0 ${pct}%,rgba(255,255,255,.08) ${pct}% 100%)"><div class="score-number">${pct}%</div></div>
+ <h2>${pct>=90?'WorldWise legend!':pct>=70?'Great global instincts!':pct>=50?'Good progress!':'Keep exploring!'}</h2>
+ <p>You got <strong>${state.correct}</strong> of <strong>${total}</strong> correct and earned <strong>${state.score}</strong> XP${state.daily?' plus a 250 XP daily bonus':''}.</p>
+ <div class="result-stats"><div><b>${state.score+(state.daily?250:0)}</b><span>XP THIS ROUND</span></div><div><b>${total}</b><span>QUESTIONS</span></div><div><b>${pct}%</b><span>ACCURACY</span></div><div><b>Lv ${level()}</b><span>YOUR LEVEL</span></div></div>
+ <div class="actions" style="justify-content:center"><button class="primary" onclick="startQuiz('${state.category==='daily'?'mixed':state.category}')">Play again</button><button class="secondary" onclick="showProfile()">View profile</button><button class="secondary" onclick="showHome()">Explore more</button></div></div>`;
 }
+function updateStreak(){
+ const today=new Date();const day=today.toISOString().slice(0,10);
+ if(profile.lastDay===day)return;
+ const yesterday=new Date(today);yesterday.setDate(today.getDate()-1);const yd=yesterday.toISOString().slice(0,10);
+ profile.streak=profile.lastDay===yd?profile.streak+1:1;profile.lastDay=day;
+}
+function level(){return Math.floor(profile.xp/500)+1}
+function levelProgress(){return profile.xp%500/5}
+function checkBadges(){badgeDefs.forEach(b=>{if(b.ok(profile)&&!profile.badges.includes(b.id)){profile.badges.push(b.id);toast('Badge unlocked: '+b.name+' '+b.icon)}})}
+function renderProfile(){
+ const pct=profile.answered?Math.round(profile.correct/profile.answered*100):0;
+ document.getElementById('profileContent').innerHTML=`<div class="profile-grid">
+ <div class="panel"><div class="profile-card"><div class="avatar">${profile.name?.[0]?.toUpperCase()||'W'}</div><div><h2>${escapeHtml(profile.name)}</h2><p>${profile.email||'Guest profile'}</p><strong>Level ${level()} · ${profile.xp} XP</strong><div class="levelbar"><i style="width:${levelProgress()}%"></i></div></div></div>
+ <div class="mini-stats" style="margin-top:20px"><div class="mini"><b>${profile.quizzes}</b><span>QUIZZES</span></div><div class="mini"><b>${profile.answered}</b><span>ANSWERED</span></div><div class="mini"><b>${pct}%</b><span>ACCURACY</span></div></div>
+ <div class="actions"><button class="primary" onclick="startQuiz('mixed')">Play now</button><button class="secondary" onclick="startDaily()">Daily challenge</button></div></div>
+ <div class="panel"><h3 style="margin-top:0">Achievements</h3><div class="badges">${badgeDefs.map(b=>{const ok=profile.badges.includes(b.id);return `<div class="badge ${ok?'':'locked'}"><div>${b.icon}</div><b>${b.name}</b><span>${b.desc}</span></div>`}).join('')}</div></div>
+ </div>
+ <div class="section" style="padding-bottom:20px"><div class="section-head"><div><h2 style="font-size:25px">Topic progress</h2><p>How many rounds you have completed in each topic.</p></div></div>
+ <div class="categories">${categories.map(c=>`<div class="category"><div class="icon">${c.icon}</div><h3>${c.name}</h3><p>${profile.topicStats[c.id]||0} rounds completed</p></div>`).join('')}</div></div>
+ <div class="panel"><h3 style="margin-top:0">Account</h3><p style="color:var(--muted)">This V2 build stores your profile locally in your browser. For secure real accounts, password authentication, and cross-device progress, connect a backend such as Supabase or Firebase.</p><button class="danger" onclick="logout()">Sign out</button></div>`;
+}
+function renderLeaderboard(){
+ const saved=JSON.parse(localStorage.getItem('worldwise_demo_players')||'[]');
+ const list=[{name:profile.name,xp:profile.xp},...saved].sort((a,b)=>b.xp-a.xp).slice(0,10);
+ document.getElementById('leaderboardContent').innerHTML=`<table class="leaderboard"><thead><tr><th>#</th><th>Player</th><th>XP</th><th>Level</th></tr></thead><tbody>${list.map((p,i)=>`<tr><td class="rank">${i+1}</td><td>${escapeHtml(p.name)}</td><td>${p.xp}</td><td>${Math.floor(p.xp/500)+1}</td></tr>`).join('')}</tbody></table>`;
+}
+function escapeHtml(s){return String(s||'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+renderCategories();updateAuthNav();renderLeaderboard();
 </script>
 </body>
 </html>
